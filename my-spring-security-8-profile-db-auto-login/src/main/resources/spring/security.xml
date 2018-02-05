@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/manager/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		
+		<!-- 
+			login-page : 로그인 페이지 연동 주소
+			login-processing-url : 로그인 페이지 form 엘리먼트의 action 속성에 할당할 연동 주소
+			default-target-url="/home" : 로그인 성공 후 연동 주소. authentication-failure-handler-ref 설정이 대신 처리한다.
+			authentication-failure-url="/login?error" : 로그인 실패인 경우 연동 주소. authentication-failure-handler-ref 설정이 대신 처리한다.
+			always-use-default-target : 로그인 성공 후에 항상 default-target-url로 설정한 곳으로 이동 시킬지 아니면 사용자가 원래가고자 하는 url로 연동 시킬지의 여부
+			authentication-success-handler-ref : 로그인 성공 후 기동시킬 핸들러
+		 -->
+		<form-login login-page="/login" 
+			login-processing-url="/login"
+			username-parameter="username"
+			password-parameter="password"
+			authentication-failure-handler-ref="myAuthenticationFailureHandler"
+			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
+		
+		<!-- 
+			logout-url : 로그아웃 처리 폼의 action 속성에 할당할 연동 주소
+		 -->
+		<!-- <logout logout-success-url="/login?logout" /> -->
+		<logout success-handler-ref="myLogoutSuccessHandler" 
+			logout-url="/logout" 
+			invalidate-session="true" delete-cookies="JSESSIONID, SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+		
+		<csrf />
+		
+		<!-- <access-denied-handler error-page="/login/denied" /> -->
+		<access-denied-handler ref="myAccessDeniedHandler" />
+		
+		<!-- 
+			token-validity-seconds="1209600" : 보존기간을 2주로 설정한다.
+			remember-me-parameter="remember-me" : 체크박스의 속성 name에 설정할 키값
+			data-source-ref : 이 속성이 명시되면, "Persistent Token Approach" 방법이 활성화 된다. 
+			기본값은 "Simple Hash-Based Token Approach" 방법이다.
+		 -->
+		<remember-me token-validity-seconds="1209600" remember-me-parameter="remember-me" data-source-ref="dataSource" />
+		
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<!-- <user-service properties="classpath:spring/security/users.xml" /> -->
+			<jdbc-user-service data-source-ref="dataSource" 
+				users-by-username-query="select username, password, enabled from users where username=?"
+				authorities-by-username-query="select username, role from user_roles where username=?" />
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
