@@ -142,7 +142,7 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 			}
 		});
 
-		// XML 설정에서는 설정할 수 있는 속성이 없다.
+		// XML 설정 security 네임스페이스에서는 설정할 수 있는 속성이 없다.
 		http.logout().addLogoutHandler(new LogoutHandler() {
 			@Override
 			public void logout(HttpServletRequest request, HttpServletResponse response,

@@ -58,8 +58,10 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -76,7 +78,7 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 		 * 따라서, data.sql을 이용한 더미 데이터 입력을 하지 말고 코드적으로 PasswordEncoder를 적용하여 데이터를 입력할 필요가 있다.
 		 */
 		
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 		
 		// UserDetailsService 서비스 대신 커스텀 AuthenticationProvider 가 UserDetailsService 를 사용하도록 조치한다.
 		// 이렇게 하면 AuthenticationProvider에서 개발자가 직접 인증과 관련한 작업을 제어할 수 있다.

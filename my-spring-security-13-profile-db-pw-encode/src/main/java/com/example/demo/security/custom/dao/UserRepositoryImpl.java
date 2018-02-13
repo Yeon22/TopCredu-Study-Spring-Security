@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ import com.example.demo.security.custom.model.User;
 @Transactional
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -63,7 +67,7 @@ public class UserRepositoryImpl implements UserRepository {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>(3);
 		paramMap.put("username", user.getUsername());
-		paramMap.put("password", user.getPassword());
+		paramMap.put("password", passwordEncoder.encode(user.getPassword()));
 		paramMap.put("enabled", user.isEnabled());
 		
 		jdbcTemplate.update(sql, paramMap);
