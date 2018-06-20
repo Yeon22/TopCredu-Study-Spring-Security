@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
-	private MyUserService userService;
+	private MyUserService userService; // UserDetailsService
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;

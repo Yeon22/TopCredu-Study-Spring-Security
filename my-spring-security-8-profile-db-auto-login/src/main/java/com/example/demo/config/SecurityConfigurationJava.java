@@ -248,6 +248,7 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 			}
 		});
 		
+		// xxx
 		http.rememberMe()
 			.tokenValiditySeconds(1209600)
 			.rememberMeParameter("remember-me")

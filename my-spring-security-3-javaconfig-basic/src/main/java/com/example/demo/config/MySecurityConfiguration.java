@@ -13,6 +13,7 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		// ROLE_USER
 		auth.inMemoryAuthentication().withUser("gildong").password("1234").roles("USER");
 		auth.inMemoryAuthentication().withUser("dba").password("1234").roles("DBA","USER");
 		auth.inMemoryAuthentication().withUser("admin").password("1234").roles("ADMIN","DBA","USER");
@@ -23,8 +24,10 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
-			.and().formLogin() // 스프링이 제공하는 기본 로그인 페이지 활성화
-			.and().exceptionHandling().accessDeniedPage("/denied");
+			.and().formLogin(); // 스프링이 제공하는 기본 로그인 페이지 활성화
+//			.and().exceptionHandling().accessDeniedPage("/denied");
+		
+		http.exceptionHandling().accessDeniedPage("/denied");
 	}
 
 }

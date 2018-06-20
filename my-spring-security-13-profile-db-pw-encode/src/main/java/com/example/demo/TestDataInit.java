@@ -20,15 +20,18 @@ public class TestDataInit {
 	@Autowired
 	private UserRepository userRepository;
 	
+	// 생성자를 부른 후 실행
 	@PostConstruct
 	public void testDataInsert() {
 		User user = new User();
 		user.setUsername("user");
 		user.setPassword("user");
 		user.setEnabled(true);
+		
 		List<Role> userRoles = new ArrayList<>();
 		userRoles.add(Role.ROLE_USER);
 		user.setRoles(userRoles);
+		
 		userRepository.insert(user);
 
 		User manager = new User();

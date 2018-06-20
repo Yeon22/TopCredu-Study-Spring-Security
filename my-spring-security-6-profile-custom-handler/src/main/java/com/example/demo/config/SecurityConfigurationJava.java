@@ -143,6 +143,7 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 		});
 
 		// XML 설정 security 네임스페이스에서는 설정할 수 있는 속성이 없다.
+		// 로그아웃 세션이 파괴되기 전에
 		http.logout().addLogoutHandler(new LogoutHandler() {
 			@Override
 			public void logout(HttpServletRequest request, HttpServletResponse response,
@@ -152,6 +153,7 @@ public class SecurityConfigurationJava extends WebSecurityConfigurerAdapter {
 		});
 
 //		http.logout().logoutSuccessUrl("/login?logout"); // LogoutSuccessHandler가 대신 처리한다.
+		// 로그아웃 세션이 파괴된 후에
 		http.logout().logoutSuccessHandler(new LogoutSuccessHandler() {
 			@Override
 			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,

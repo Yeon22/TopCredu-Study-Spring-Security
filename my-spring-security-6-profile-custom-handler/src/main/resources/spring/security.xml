@@ -17,7 +17,7 @@
 			default-target-url="/home" : 로그인 성공 후 연동 주소. authentication-failure-handler-ref 설정이 대신 처리한다.
 			authentication-failure-url="/login?error" : 로그인 실패인 경우 연동 주소. authentication-failure-handler-ref 설정이 대신 처리한다.
 			always-use-default-target : 로그인 성공 후에 항상 default-target-url로 설정한 곳으로 이동 시킬지 아니면 사용자가 원래가고자 하는 url로 연동 시킬지의 여부
-			authentication-success-handler-ref : 로그인 성공 후 기동시킬 핸들러
+			authentication-success-handler-ref : 로그인 성공 후 기동시킬 핸들러. ref는 객체란 소리이다.
 		 -->
 		<form-login login-page="/login" 
 			login-processing-url="/login"

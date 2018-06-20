@@ -1,3 +1,5 @@
+--DML
+
 INSERT INTO users(username, password, enabled) VALUES ('user', 'user', true);
 INSERT INTO users(username, password, enabled) VALUES ('manager', 'manager', true);
 INSERT INTO users(username, password, enabled) VALUES ('admin', 'admin', true);

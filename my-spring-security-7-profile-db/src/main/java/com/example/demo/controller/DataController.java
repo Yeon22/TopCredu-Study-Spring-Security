@@ -26,6 +26,7 @@ public class DataController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		// 로그인 했다면
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			// UserDetails: 스프링이 유저 정보를 취급하기 위해서 선언한 모델클래스 
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			System.out.println("로그인 ID : " + userDetail.getUsername());
 		}
