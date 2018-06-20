@@ -11,6 +11,7 @@
 		<intercept-url pattern="/secret*" access="hasRole('ROLE_ADMIN')" />
 		
 		<!-- login-page="/login" : 커스텀 로그인 페이지를 사용한다고 선언한다. 후속작업으로  "/login" URL을 처리하는 컨트롤러가 필요하다. -->
+		<!-- default-target-url : 로그인이 성공 후 사용자에게 보여줄 화면 -->
 		<form-login login-page="/login" 
 			default-target-url="/basics"
 			authentication-failure-url="/login?error" 

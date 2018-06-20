@@ -52,14 +52,15 @@
 		
 		<!-- JSTL for JSP -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
 		</dependency>
 
 		<!-- Need this to compile JSP -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>7.0.54</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -76,6 +77,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			   <groupId>org.apache.maven.plugins</groupId>
+			   <artifactId>maven-jar-plugin</artifactId>
+			   <version>3.1.0</version>
+			 </plugin>
 		</plugins>
 	</build>
 

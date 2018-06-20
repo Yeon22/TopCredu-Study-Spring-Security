@@ -20,7 +20,8 @@
 		<%-- 시큐리티 3 버전에서는 logout 대신 j_spring_security_logout을 사용한다. --%>
 		<form id="logoutForm" action="${pageContext.request.contextPath}/logout" method="post" >
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<input type="submit" value="Logout" />
+			<!-- <input type="submit" value="Logout" /> -->
+			<button type="submit">로그아웃</button>
 		</form>
 	</c:if>
 	

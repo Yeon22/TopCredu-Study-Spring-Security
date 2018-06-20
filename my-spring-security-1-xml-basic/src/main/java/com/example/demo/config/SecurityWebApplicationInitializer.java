@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
+// ~Initializer 클래스는 스프링이 자동으로 인식한다. 즉, 스캐닝 대상으로 삼기위한 @Component 설정이 필요 없다.
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 	
 //	<filter>
